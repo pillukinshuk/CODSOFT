@@ -1,0 +1,91 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+class Movie {
+public:
+  Movie(string title, string showtime) {
+    this->title = title;
+    this->showtime = showtime;
+    this->available_seats = 100;
+  }
+
+  string get_title() { return title; }
+  string get_showtime() { return showtime; }
+  int get_available_seats() { return available_seats; }
+
+  void book_seat() { available_seats--; }
+
+private:
+  string title;
+  string showtime;
+  int available_seats;
+};
+
+
+class MovieTicketBookingSystem {
+public:
+  MovieTicketBookingSystem() {
+    movies.push_back(Movie("The Shawshank Redemption", "12:00 PM"));
+    movies.push_back(Movie("The Godfather", "3:00 PM"));
+    movies.push_back(Movie("The Dark Knight", "6:00 PM");
+  }
+
+  void view_movie_listings() {
+    for (int i = 0; i < movies.size(); i++) {
+      cout << i + 1 << ". " << movies[i].get_title() << " (" << movies[i].get_showtime() << ")" << endl;
+    }
+  }
+
+  void select_seats(int movie_index, vector<int>& seats) {
+    for (int i = 0; i < seats.size(); i++) {
+      if (seats[i] < 1 || seats[i] > movies[movie_index].get_available_seats()) {
+        cout << "Invalid seat number: " << seats[i] << endl;
+        return;
+      }
+    }
+
+    for (int i = 0; i < seats.size(); i++) {
+      movies[movie_index].book_seat();
+    }
+  }
+
+  void make_booking(int movie_index, vector<int>& seats, string name, string phone_number) {
+    select_seats(movie_index, seats);
+
+    double total_cost = seats.size() * 10;
+
+    cout << "Booking confirmed!" << endl;
+    cout << "Movie: " << movies[movie_index].get_title() << endl;
+    cout << "Showtime: " << movies[movie_index].get_showtime() << endl;
+    cout << "Seats: ";
+    for (int i = 0; i < seats.size(); i++) {
+      cout << seats[i] << " ";
+    }
+    cout << endl;
+    cout << "Total cost: $" << total_cost << endl;
+    cout << "Name: " << name << endl;
+    cout << "Phone number: " << phone_number << endl;
+  }
+
+private:
+  vector<Movie> movies;
+};
+
+int main() {
+  MovieTicketBookingSystem booking_system;
+
+  
+  booking_system.view_movie_listings();
+
+ 
+  int movie_index = 0;
+  vector<int> seats = {1, 2, 3};
+
+  
+  booking_system.make_booking(movie_index, seats, "John Doe", "123-456-7890");
+
+  return 0;
+}
