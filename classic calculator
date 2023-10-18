@@ -1,0 +1,34 @@
+#include <iostream>
+
+using namespace std;
+
+double calculate(double num1, double num2, char op) {
+  switch (op) {
+    case '+':
+      return num1 + num2;
+    case '-':
+      return num1 - num2;
+    case '*':
+      return num1 * num2;
+    case '/':
+      return num1 / num2;
+    default:
+      cout << "Invalid operation!\n";
+      return 0;
+  }
+}
+
+int main() {
+  double num1, num2;
+  cout << "Enter two numbers: ";
+  cin >> num1 >> num2;
+
+  char op;
+  cout << "Enter an operation (+, -, *, or /): ";
+  cin >> op;
+
+  double result = calculate(num1, num2, op);
+  cout << "The result is: " << result << endl;
+
+  return 0;
+}
